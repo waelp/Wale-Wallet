@@ -1,26 +1,39 @@
-```javascript
 const app = {
     currentTab: 'dashboard',
     currentPeriod: 'thisMonth',
 
     init() {
-        // Initialize Language
-        Lang.init();
+        try {
+            // Initialize Language
+            if (typeof Lang !== 'undefined') {
+                Lang.init();
+            } else {
+                console.error('Lang is not defined');
+            }
 
-        // Initialize Theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('theme-dark');
+            // Initialize Theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('theme-dark');
+            }
+
+            // Check Auth - Always init
+            if (typeof Store !== 'undefined') {
+                Store.init();
+            } else {
+                throw new Error('Store is not defined');
+            }
+
+            this.navigate('dashboard');
+
+            // Listen for data changes to re-render
+            document.addEventListener('dataChanged', () => {
+                if (Store.currentUser) this.render();
+            });
+        } catch (e) {
+            alert('App Init Error: ' + e.message);
+            console.error(e);
         }
-        
-        // Check Auth - Always init
-        Store.init();
-        this.navigate('dashboard');
-        
-        // Listen for data changes to re-render
-        document.addEventListener('dataChanged', () => {
-            if (Store.currentUser) this.render();
-        });
     },
 
 
@@ -34,10 +47,10 @@ const app = {
 
     navigate(tab) {
         this.currentTab = tab;
-        
+
         // Show Tab Bar
         document.getElementById('tab-bar').style.display = 'flex';
-        
+
         // Update Tab Bar
         document.querySelectorAll('.tab-item').forEach(el => {
             el.classList.toggle('active', el.dataset.tab === tab);
@@ -88,20 +101,20 @@ const app = {
     openModal(type, data = {}) {
         const modalContent = document.getElementById('modal-content');
         const overlay = document.getElementById('modal-overlay');
-        
+
         // If editing, we need to pass the ID and existing values
         let formHtml = UI.getFormHtml(type, data);
-        
+
         // Inject ID if editing
         if (data.id) {
-            formHtml = formHtml.replace('<form', `< form data - edit - id="${data.id}"`);
-            
+            formHtml = formHtml.replace('<form', `<form data-edit-id="${data.id}"`);
+
             // Pre-fill logic (simple string replacement for now, or use JS to set values after render)
             // A better approach is to render, then populate.
         }
 
         modalContent.innerHTML = formHtml;
-        
+
         // Populate values if editing
         if (data.id) {
             const form = modalContent.querySelector('form');
@@ -116,7 +129,7 @@ const app = {
         overlay.classList.remove('hidden');
         // Small delay to allow display:block to apply before opacity transition
         setTimeout(() => overlay.classList.add('visible'), 10);
-        
+
         // Re-init icons in modal
         if (window.lucide) lucide.createIcons();
     },
@@ -140,7 +153,7 @@ const app = {
 
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
-        
+
         recognition.lang = Lang.current === 'ar' ? 'ar-SA' : 'en-US';
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;

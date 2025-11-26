@@ -1,4 +1,3 @@
-```javascript
 const UI = {
     renderDashboard() {
         const period = app.currentPeriod || 'thisMonth';
@@ -34,7 +33,7 @@ const UI = {
                 </div>
             </div >
 
-    ${ alertHtml }
+    ${alertHtml}
 
             < !--Wallet Card-- >
             <div class="card" style="background: linear-gradient(135deg, var(--ios-blue), var(--ios-indigo)); color: white;">
@@ -232,8 +231,7 @@ const UI = {
                 </button>
             </div >
 
-    ${
-    list.map(debt => `
+    ${list.map(debt => `
                 <div class="card">
                     <div class="flex-row" style="margin-bottom: 8px;">
                         <h3 style="color: ${debt.status === 'Closed' ? 'var(--ios-green)' : 'inherit'}">
@@ -259,8 +257,8 @@ const UI = {
                     </div>
                 </div>
             `).join('')
-}
-            ${ list.length === 0 ? '<div class="card"><p class="text-secondary" style="text-align: center; padding: 20px;">' + Lang.t('no_records') + '</p></div>' : '' }
+            }
+            ${list.length === 0 ? '<div class="card"><p class="text-secondary" style="text-align: center; padding: 20px;">' + Lang.t('no_records') + '</p></div>' : ''}
 `;
     },
 
@@ -419,7 +417,7 @@ const UI = {
 
         if (type === 'savings') {
             return `
-    < h2 > ${ Lang.t('add') } ${ Lang.t('savings') }</h2 >
+    < h2 > ${Lang.t('add')} ${Lang.t('savings')}</h2 >
         <form onsubmit="app.handleSubmit(event, 'savings')">
             <div class="input-group">
                 <label class="input-label">${Lang.t('amount')} (${Lang.t('savings_hint') || 'Positive for deposit, Negative for withdrawal'})</label>
@@ -468,7 +466,6 @@ const UI = {
                         <i data-lucide="download" style="color: var(--ios-blue);"></i>
                     </div>
                 </div>
-
 
             </div>
 
