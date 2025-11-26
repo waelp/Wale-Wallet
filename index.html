@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Your Wallet</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Main Content Area -->
+        <main id="main-content" class="safe-area-top safe-area-bottom-margin">
+            <!-- Views will be injected here -->
+        </main>
+
+        <!-- Persistent Footer -->
+        <div
+            style="text-align: center; padding: 10px; font-size: 12px; color: var(--text-secondary); position: fixed; bottom: 80px; width: 100%; pointer-events: none;">
+            Wael Allam
+        </div>
+
+        <!-- Tab Bar -->
+        <nav id="tab-bar" class="safe-area-bottom">
+            <button class="tab-item active" data-tab="dashboard" onclick="app.navigate('dashboard')">
+                <i data-lucide="layout-dashboard"></i>
+                <span>الرئيسية</span>
+            </button>
+            <button class="tab-item" data-tab="income" onclick="app.navigate('income')">
+                <i data-lucide="arrow-down-circle"></i>
+                <span>الدخل</span>
+            </button>
+            <button class="tab-item" data-tab="expenses" onclick="app.navigate('expenses')">
+                <i data-lucide="arrow-up-circle"></i>
+                <span>المصاريف</span>
+            </button>
+            <button class="tab-item" data-tab="debts" onclick="app.navigate('debts')">
+                <i data-lucide="credit-card"></i>
+                <span>الديون</span>
+            </button>
+            <button class="tab-item" data-tab="savings" onclick="app.navigate('savings')">
+                <i data-lucide="piggy-bank"></i>
+                <span>الادخار</span>
+            </button>
+        </nav>
+
+        <!-- Modal Container -->
+        <div id="modal-overlay" class="hidden">
+            <div id="modal-content">
+                <!-- Modal content injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/lang.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Initialize icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

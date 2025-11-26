@@ -1,0 +1,335 @@
+:root {
+    /* iOS System Colors */
+    --ios-blue: #007AFF;
+    --ios-green: #34C759;
+    --ios-red: #FF3B30;
+    --ios-orange: #FF9500;
+    --ios-yellow: #FFCC00;
+    --ios-indigo: #5856D6;
+    --ios-purple: #AF52DE;
+    --ios-pink: #FF2D55;
+    --ios-teal: #5AC8FA;
+    --ios-gray: #8E8E93;
+    --ios-gray2: #AEAEB2;
+    --ios-gray3: #C7C7CC;
+    --ios-gray4: #D1D1D6;
+    --ios-gray5: #E5E5EA;
+    --ios-gray6: #F2F2F7;
+
+    /* Backgrounds */
+    --bg-primary: #F2F2F7;
+    /* System Grouped Background */
+    --bg-card: #FFFFFF;
+    --bg-modal: #FFFFFF;
+
+    /* Text */
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --text-tertiary: #C7C7CC;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Safe Areas */
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+
+    /* Default Theme (Blue/White) */
+    --primary-bg: #F2F2F7;
+    --card-bg: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --ios-blue: #007AFF;
+    --ios-green: #34C759;
+    --ios-red: #FF3B30;
+    --ios-orange: #FF9500;
+    --ios-indigo: #5856D6;
+    --ios-gray5: #E5E5EA;
+    --separator: #C6C6C8;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #000000;
+        --bg-card: #1C1C1E;
+        --bg-modal: #1C1C1E;
+        --text-primary: #FFFFFF;
+        --ios-gray6: #1C1C1E;
+        --ios-gray5: #2C2C2E;
+    }
+}
+
+/* Dark Theme (Gray/Dark Blue) */
+.theme-dark {
+    --primary-bg: #1C1C1E;
+    /* Dark Gray Background */
+    --card-bg: #2C2C2E;
+    /* Lighter Gray for Cards */
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
+    --ios-blue: #0A84FF;
+    /* Lighter Blue for Dark Mode */
+    --ios-green: #30D158;
+    --ios-red: #FF453A;
+    --ios-orange: #FF9F0A;
+    --ios-indigo: #5E5CE6;
+    --ios-gray5: #3A3A3C;
+    --separator: #38383A;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll, handle in main */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+    padding-bottom: calc(80px + var(--safe-bottom));
+    /* Space for tab bar */
+    padding-top: calc(20px + var(--safe-top));
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    margin: 0;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 34px;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--spacing-md);
+}
+
+h2 {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+h3 {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+.text-caption {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* Components */
+.card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+    background: var(--ios-blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn:active {
+    opacity: 0.7;
+}
+
+.btn-secondary {
+    background: var(--ios-gray5);
+    color: var(--ios-blue);
+}
+
+.btn-danger {
+    background: var(--ios-red);
+    color: white;
+}
+
+.input-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.input-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: var(--ios-gray6);
+    color: var(--text-primary);
+    font-size: 17px;
+    appearance: none;
+}
+
+.input-field:focus {
+    outline: 2px solid var(--ios-blue);
+}
+
+/* Tab Bar */
+#tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(50px + var(--safe-bottom));
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 0.5px solid var(--ios-gray3);
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: var(--safe-bottom);
+    z-index: 100;
+}
+
+.tab-item {
+    background: none;
+    border: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 10px;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.tab-item.active {
+    color: var(--ios-blue);
+}
+
+.tab-item svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Modal */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+#modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#modal-content {
+    background: var(--bg-modal);
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+    padding: var(--spacing-md);
+    padding-bottom: calc(var(--spacing-md) + var(--safe-bottom));
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+#modal-overlay.visible #modal-content {
+    transform: translateY(0);
+}
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-green {
+    color: var(--ios-green);
+}
+
+.text-red {
+    color: var(--ios-red);
+}
+
+.amount {
+    font-family: "SF Mono", Menlo, monospace;
+    font-weight: 600;
+}
+
+/* List Items */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--ios-gray5);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
